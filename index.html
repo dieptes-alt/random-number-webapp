@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Random Number Generator</title>
+  <title>Animated Symbol Generator</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
@@ -12,13 +12,14 @@
     }
 
     #resultBtn {
+      position: relative;
       margin-top: 4vh;
       padding: 2em 4em;
-      font-size: 2rem;
+      font-size: 6rem; /* large symbol */
       border: none;
       color: white;
       border-radius: 1em;
-      background-color: black;
+      background-color: #ccc;
       box-shadow: inset -3px -3px 8px rgba(255,255,255,0.2),
                   inset 3px 3px 8px rgba(0,0,0,0.3),
                   5px 5px 12px rgba(0,0,0,0.3);
@@ -26,12 +27,37 @@
       max-width: 90vw;
       word-wrap: break-word;
       cursor: pointer;
+      line-height: 1;
+    }
+
+    #numberLabel {
+      position: absolute;
+      bottom: 10px;
+      right: 20px;
+      font-size: 1.2rem;
+      color: white;
+    }
+
+    .animate {
+      animation: bounce 0.4s ease;
+    }
+
+    @keyframes bounce {
+      0%   { transform: scale(1); }
+      50%  { transform: scale(1.2); }
+      100% { transform: scale(1); }
     }
 
     @media (max-width: 600px) {
       #resultBtn {
-        font-size: 1.5rem;
+        font-size: 4rem;
         padding: 1.5em 3em;
+      }
+
+      #numberLabel {
+        font-size: 1rem;
+        bottom: 8px;
+        right: 15px;
       }
     }
   </style>
@@ -39,34 +65,57 @@
 <body>
 
   <h1>Welke kleur heb jij?</h1>
-  <button id="resultBtn" ondblclick="reset()" onclick="generateNumber()">Begin</button>
+  <button id="resultBtn" ondblclick="reset()" onclick="generateSymbol()">
+    <span id="symbol">Begin</span>
+    <span id="numberLabel"></span>
+  </button>
 
   <script>
-    function generateNumber() {
+    function generateSymbol() {
       const number = Math.floor(Math.random() * 100) + 1;
       const resultBtn = document.getElementById("resultBtn");
-      let color = "black";
+      const symbolSpan = document.getElementById("symbol");
+      const numberLabel = document.getElementById("numberLabel");
+
+      let symbol = "💀";
+      let bgColor = "black";
 
       if (number >= 1 && number <= 24) {
-        color = "red";
+        symbol = "🔥";
+        bgColor = "red";
       } else if (number >= 25 && number <= 48) {
-        color = "green";
+        symbol = "🌳";
+        bgColor = "green";
       } else if (number >= 49 && number <= 73) {
-        color = "blue";
+        symbol = "🌊";
+        bgColor = "blue";
       } else if (number >= 74 && number <= 95) {
-        color = "orange";
+        symbol = "⚡";
+        bgColor = "orange";
       }
 
-      resultBtn.textContent = number;
-      resultBtn.style.backgroundColor = color;
+      symbolSpan.textContent = symbol;
+      numberLabel.textContent = number;
+      resultBtn.style.backgroundColor = bgColor;
+
+      resultBtn.classList.remove("animate");
+      void resultBtn.offsetWidth;
+      resultBtn.classList.add("animate");
     }
 
     function reset() {
       const resultBtn = document.getElementById("resultBtn");
-      resultBtn.textContent = "Press Me";
-      resultBtn.style.backgroundColor = "black";
+      const symbolSpan = document.getElementById("symbol");
+      const numberLabel = document.getElementById("numberLabel");
+
+      symbolSpan.textContent = "Press Me";
+      numberLabel.textContent = "";
+      resultBtn.style.backgroundColor = "#ccc";
+      resultBtn.classList.remove("animate");
     }
   </script>
 
 </body>
 </html>
+</html>
+
