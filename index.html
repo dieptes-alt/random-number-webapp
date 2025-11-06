@@ -1,40 +1,45 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Random Number Generator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       font-family: Arial, sans-serif;
       text-align: center;
-      padding-top: 50px;
+      padding: 5vh;
     }
-    .btn {
-      margin: 10px;
-      padding: 10px 20px;
-      font-size: 16px;
-      cursor: pointer;
-    }
+
     #resultBtn {
-      margin-top: 20px;
-      padding: 15px 30px;
-      font-size: 24px;
+      margin-top: 4vh;
+      padding: 2em 4em;
+      font-size: 2rem;
       border: none;
       color: white;
+      border-radius: 1em;
       background-color: black;
-      visibility: hidden;
+      box-shadow: inset -3px -3px 8px rgba(255,255,255,0.2),
+                  inset 3px 3px 8px rgba(0,0,0,0.3),
+                  5px 5px 12px rgba(0,0,0,0.3);
+      transition: all 0.2s ease;
+      max-width: 90vw;
+      word-wrap: break-word;
+      cursor: pointer;
+    }
+
+    @media (max-width: 600px) {
+      #resultBtn {
+        font-size: 1.5rem;
+        padding: 1.5em 3em;
+      }
     }
   </style>
 </head>
 <body>
 
-  <h1>Kies een kleur</h1>
-  <button class="btn" onclick="generateNumber()">Generate</button>
-  <button class="btn" onclick="reset()">Reset</button>
-  <br>
-  <button id="resultBtn">0</button>
+  <h1>Welke kleur heb jij?</h1>
+  <button id="resultBtn" ondblclick="reset()" onclick="generateNumber()">Begin</button>
 
   <script>
     function generateNumber() {
@@ -54,14 +59,12 @@
 
       resultBtn.textContent = number;
       resultBtn.style.backgroundColor = color;
-      resultBtn.style.visibility = "visible";
     }
 
     function reset() {
       const resultBtn = document.getElementById("resultBtn");
-      resultBtn.textContent = "0";
+      resultBtn.textContent = "Press Me";
       resultBtn.style.backgroundColor = "black";
-      resultBtn.style.visibility = "hidden";
     }
   </script>
 
