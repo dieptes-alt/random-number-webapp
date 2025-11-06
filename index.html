@@ -1,0 +1,69 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Random Number Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 50px;
+    }
+    .btn {
+      margin: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    #resultBtn {
+      margin-top: 20px;
+      padding: 15px 30px;
+      font-size: 24px;
+      border: none;
+      color: white;
+      background-color: black;
+      visibility: hidden;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Kies een kleur</h1>
+  <button class="btn" onclick="generateNumber()">Generate</button>
+  <button class="btn" onclick="reset()">Reset</button>
+  <br>
+  <button id="resultBtn">0</button>
+
+  <script>
+    function generateNumber() {
+      const number = Math.floor(Math.random() * 100) + 1;
+      const resultBtn = document.getElementById("resultBtn");
+      let color = "black";
+
+      if (number >= 1 && number <= 24) {
+        color = "red";
+      } else if (number >= 25 && number <= 48) {
+        color = "green";
+      } else if (number >= 49 && number <= 73) {
+        color = "blue";
+      } else if (number >= 74 && number <= 95) {
+        color = "orange";
+      }
+
+      resultBtn.textContent = number;
+      resultBtn.style.backgroundColor = color;
+      resultBtn.style.visibility = "visible";
+    }
+
+    function reset() {
+      const resultBtn = document.getElementById("resultBtn");
+      resultBtn.textContent = "0";
+      resultBtn.style.backgroundColor = "black";
+      resultBtn.style.visibility = "hidden";
+    }
+  </script>
+
+</body>
+</html>
